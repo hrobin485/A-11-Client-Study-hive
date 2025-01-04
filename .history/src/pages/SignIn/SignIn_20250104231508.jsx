@@ -1,38 +1,42 @@
 import Lottie from 'lottie-react';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import loginLottieJSON from '../../assets/lottie/login.json';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import SocialLogin from '../shared/SocialLogin';
-import Swal from 'sweetalert2';
 
 const SignIn = () => {
     const { singInUser, singInWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate(); // Hook for navigation
 
-    const handleSignIn = async (e) => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleSignIn = (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
 
-        try {
-            const result = await singInUser(email, password);
-            console.log('Sign in successful:', result.user);
-            Swal.fire({
-                icon: 'success',
-                title: 'Login Successful!',
-                text: 'Welcome back!',
+        singInUser(email, password)
+            .then((result) => {
+                console.log('Sign in successful:', result.user);
+                navigate('/'); // Redirect to homepage
+            })
+            .catch((error) => {
+                console.error('Sign in error:', error.message);
+                alert('Login failed. Please check your credentials.');
             });
-            navigate('/'); // Redirect to homepage
-        } catch (error) {
-            console.error('Sign in error:', error.message);
-            Swal.fire({
-                icon: 'error',
-                title: 'Login Failed',
-                text: error.message || 'Please check your credentials.',
+    };
+
+    const handleGoogleSignIn = () => {
+        singInWithGoogle()
+            .then((result) => {
+                console.log(result.user);
+                navigate('/'); // Redirect to homepage after Google login
+            })
+            .catch((error) => {
+                console.error('Google sign-in error:', error.message);
             });
-        }
     };
 
     return (
@@ -60,13 +64,24 @@ const SignIn = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder="Enter your password"
-                                className="input input-bordered"
-                                required
-                            />
+                            <div className="relative">
+                                <input
+                                    type={showPassword ? 'text' : 'password'}
+                                    name="password"
+                                    placeholder="Enter your password"
+                                    className="input input-bordered w-full"
+                                    required
+                                />
+                                <div className="absolute inset-y-0 right-0 flex items-center pr-2">
+                                    <input
+                                        type="checkbox"
+                                        className="toggle-checkbox"
+                                        checked={showPassword}
+                                        onChange={() => setShowPassword(!showPassword)}
+                                    />
+                                    <label className="ml-2">Show Password</label>
+                                </div>
+                            </div>
                             <div className="flex justify-between mt-2">
                                 <a href="#" className="text-sm link link-hover">
                                     Forgot Password?
@@ -81,7 +96,7 @@ const SignIn = () => {
                         </div>
                     </form>
                     <div className="form-control">
-                        <SocialLogin></SocialLogin>
+                        <SocialLogin onGoogleSignIn={handleGoogleSignIn}></SocialLogin>
                     </div>
                 </div>
             </div>

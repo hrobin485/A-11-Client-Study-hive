@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import registerLottieData from '../../assets/lottie/register.json';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import SocialLogin from '../shared/SocialLogin';
-import Swal from 'sweetalert2';
 
 const Register = () => {
     const { createUser } = useContext(AuthContext);
@@ -12,7 +11,7 @@ const Register = () => {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleRegister = async (e) => {
+    const handleRegister = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -23,31 +22,19 @@ const Register = () => {
         // Password validation logic
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         if (!passwordRegex.test(password)) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Password Error',
-                text: 'Password must have an uppercase letter, a lowercase letter, and be at least 6 characters long.',
-            });
+            alert("Password must have an uppercase letter, a lowercase letter, and be at least 6 characters long.");
             return;
         }
 
-        try {
-            const result = await createUser(email, password);
-            console.log(result.user);
-            Swal.fire({
-                icon: 'success',
-                title: 'Registration Successful!',
-                text: 'Welcome! You have been successfully registered.',
+        createUser(email, password)
+            .then((result) => {
+                console.log(result.user);
+                // Optionally update user profile with name and photoURL
+                navigate('/'); // Redirect to homepage after registration
+            })
+            .catch((error) => {
+                console.log(error.message);
             });
-            navigate('/'); // Redirect to homepage
-        } catch (error) {
-            console.log(error.message);
-            Swal.fire({
-                icon: 'error',
-                title: 'Registration Failed',
-                text: error.message || 'An error occurred. Please try again.',
-            });
-        }
     };
 
     return (
@@ -103,18 +90,37 @@ const Register = () => {
                                     type={showPassword ? 'text' : 'password'}
                                     name="password"
                                     placeholder="Enter your password"
-                                    className="input input-bordered w-full"
+                                    className="input input-bordered w-full pr-10"
                                     required
                                 />
-                                <div className="absolute inset-y-0 right-0 flex items-center pr-2">
-                                    <input
-                                        type="checkbox"
-                                        className="toggle-checkbox"
-                                        checked={showPassword}
-                                        onChange={() => setShowPassword(!showPassword)}
-                                    />
-                                    <label className="ml-2">Show Password</label>
-                                </div>
+                                <span
+                                    className="absolute inset-y-0 right-0 flex items-center pr-2 cursor-pointer"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-5 w-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        {showPassword ? (
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M15 12a3 3 0 01-6 0 3 3 0 116 0z"
+                                            />
+                                        ) : (
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M10 14l4-4m0 0l4 4m-4-4V7m0 0l-4 4m0 0L6 7"
+                                            />
+                                        )}
+                                    </svg>
+                                </span>
                             </div>
                             <label className="label">
                                 <span className="label-text-alt">
@@ -124,14 +130,14 @@ const Register = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Register</button>
-                            <div className="form-control mt-4">
-                                <p className="text-sm">
-                                    Already have an account? <Link to="/signIn" className="text-blue-500">Login</Link>
-                                </p>
-                            </div>
                         </div>
                     </form>
                     <SocialLogin></SocialLogin>
+                    <div className="form-control mt-4">
+                        <p className="text-sm">
+                            Already have an account? <Link to="/signIn" className="text-blue-500">Login</Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

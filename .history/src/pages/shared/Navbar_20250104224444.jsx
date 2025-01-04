@@ -68,7 +68,7 @@ const Navbar = () => {
                                     alt="Profile"
                                     className="w-8 h-8 rounded-full border border-gray-300 cursor-pointer"
                                 />
-                                <div className="absolute left-0 w-48 bg-gray-700 text-white text-xs rounded px-2 py-1 mt-2 hidden group-hover:block">
+                                <div className="absolute bottom-full mb-2 hidden group-hover:block bg-gray-700 text-white text-xs rounded px-2 py-1 w-48">
                                     <ul>
                                         <li><NavLink to="/create-assignments" className="block px-2 py-1 hover:bg-gray-600">Create Assignments</NavLink></li>
                                         <li><NavLink to="/my-attempted-assignments" className="block px-2 py-1 hover:bg-gray-600">My Attempted Assignments</NavLink></li>

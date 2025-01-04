@@ -4,34 +4,36 @@ import { useNavigate } from 'react-router-dom';
 import loginLottieJSON from '../../assets/lottie/login.json';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import SocialLogin from '../shared/SocialLogin';
-import Swal from 'sweetalert2';
 
 const SignIn = () => {
     const { singInUser, singInWithGoogle } = useContext(AuthContext);
-    const navigate = useNavigate(); // Hook for navigation
+    const navigate = useNavigate();
 
-    const handleSignIn = async (e) => {
+    const handleSignIn = (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
 
-        try {
-            const result = await singInUser(email, password);
-            console.log('Sign in successful:', result.user);
-            Swal.fire({
-                icon: 'success',
-                title: 'Login Successful!',
-                text: 'Welcome back!',
+        singInUser(email, password)
+            .then((result) => {
+                console.log('Sign in successful:', result.user);
+                navigate('/'); // Redirect to homepage
+            })
+            .catch((error) => {
+                console.error('Sign in error:', error.message);
+                alert('Login failed. Please check your credentials.');
             });
+    };
+
+    const handleGoogleSignIn = async () => {
+        try {
+            const userCredential = await singInWithGoogle();
+            console.log('Google sign-in successful:', userCredential.user);
             navigate('/'); // Redirect to homepage
         } catch (error) {
-            console.error('Sign in error:', error.message);
-            Swal.fire({
-                icon: 'error',
-                title: 'Login Failed',
-                text: error.message || 'Please check your credentials.',
-            });
+            console.error('Google sign-in error:', error.message);
+            alert('Google sign-in failed. Please try again.');
         }
     };
 
@@ -80,6 +82,11 @@ const SignIn = () => {
                             <button className="btn btn-primary">Login</button>
                         </div>
                     </form>
+                    <div className="form-control">
+                        <button onClick={handleGoogleSignIn} className="btn btn-primary mt-4">
+                            Sign in with Google
+                        </button>
+                    </div>
                     <div className="form-control">
                         <SocialLogin></SocialLogin>
                     </div>

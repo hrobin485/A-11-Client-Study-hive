@@ -61,18 +61,15 @@ const Navbar = () => {
             <div className="navbar-end">
                 {
                     user ? (
-                        <div className="flex items-center gap-4 relative group">
+                        <div className="flex items-center gap-4">
                             <div className="relative group">
                                 <img
                                     src={user.photoURL || '/default-avatar.png'}
                                     alt="Profile"
-                                    className="w-8 h-8 rounded-full border border-gray-300 cursor-pointer"
+                                    className="w-8 h-8 rounded-full border border-gray-300"
                                 />
-                                <div className="absolute left-0 w-48 bg-gray-700 text-white text-xs rounded px-2 py-1 mt-2 hidden group-hover:block">
-                                    <ul>
-                                        <li><NavLink to="/create-assignments" className="block px-2 py-1 hover:bg-gray-600">Create Assignments</NavLink></li>
-                                        <li><NavLink to="/my-attempted-assignments" className="block px-2 py-1 hover:bg-gray-600">My Attempted Assignments</NavLink></li>
-                                    </ul>
+                                <div className="absolute bottom-full mt-10 hidden group-hover:block bg-gray-700 text-white text-xs rounded px-2 py-1 ">
+                                    {user.displayName || 'User Name'}
                                 </div>
                             </div>
                             <button onClick={handleSignOut} className="btn">Sign out</button>

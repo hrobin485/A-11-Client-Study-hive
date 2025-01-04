@@ -4,35 +4,26 @@ import { useNavigate } from 'react-router-dom';
 import loginLottieJSON from '../../assets/lottie/login.json';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import SocialLogin from '../shared/SocialLogin';
-import Swal from 'sweetalert2';
 
 const SignIn = () => {
-    const { singInUser, singInWithGoogle } = useContext(AuthContext);
+    const { singInUser,singInWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate(); // Hook for navigation
 
-    const handleSignIn = async (e) => {
+    const handleSignIn = (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
 
-        try {
-            const result = await singInUser(email, password);
-            console.log('Sign in successful:', result.user);
-            Swal.fire({
-                icon: 'success',
-                title: 'Login Successful!',
-                text: 'Welcome back!',
+        singInUser(email, password)
+            .then((result) => {
+                console.log('Sign in successful:', result.user);
+                navigate('/'); // Redirect to homepage
+            })
+            .catch((error) => {
+                console.error('Sign in error:', error.message);
+                alert('Login failed. Please check your credentials.');
             });
-            navigate('/'); // Redirect to homepage
-        } catch (error) {
-            console.error('Sign in error:', error.message);
-            Swal.fire({
-                icon: 'error',
-                title: 'Login Failed',
-                text: error.message || 'Please check your credentials.',
-            });
-        }
     };
 
     return (

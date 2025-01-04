@@ -1,18 +1,15 @@
 import Lottie from 'lottie-react';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import registerLottieData from '../../assets/lottie/register.json';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import SocialLogin from '../shared/SocialLogin';
-import Swal from 'sweetalert2';
 
 const Register = () => {
     const { createUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handleRegister = async (e) => {
+    const handleRegister = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -23,31 +20,19 @@ const Register = () => {
         // Password validation logic
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         if (!passwordRegex.test(password)) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Password Error',
-                text: 'Password must have an uppercase letter, a lowercase letter, and be at least 6 characters long.',
-            });
+            alert("Password must have an uppercase letter, a lowercase letter, and be at least 6 characters long.");
             return;
         }
 
-        try {
-            const result = await createUser(email, password);
-            console.log(result.user);
-            Swal.fire({
-                icon: 'success',
-                title: 'Registration Successful!',
-                text: 'Welcome! You have been successfully registered.',
+        createUser(email, password)
+            .then((result) => {
+                console.log(result.user);
+                // Optionally update user profile with name and photoURL
+                navigate('/'); // Redirect to homepage after registration
+            })
+            .catch((error) => {
+                console.log(error.message);
             });
-            navigate('/'); // Redirect to homepage
-        } catch (error) {
-            console.log(error.message);
-            Swal.fire({
-                icon: 'error',
-                title: 'Registration Failed',
-                text: error.message || 'An error occurred. Please try again.',
-            });
-        }
     };
 
     return (
@@ -98,24 +83,13 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <div className="relative">
-                                <input
-                                    type={showPassword ? 'text' : 'password'}
-                                    name="password"
-                                    placeholder="Enter your password"
-                                    className="input input-bordered w-full"
-                                    required
-                                />
-                                <div className="absolute inset-y-0 right-0 flex items-center pr-2">
-                                    <input
-                                        type="checkbox"
-                                        className="toggle-checkbox"
-                                        checked={showPassword}
-                                        onChange={() => setShowPassword(!showPassword)}
-                                    />
-                                    <label className="ml-2">Show Password</label>
-                                </div>
-                            </div>
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                className="input input-bordered"
+                                required
+                            />
                             <label className="label">
                                 <span className="label-text-alt">
                                     Note: Must have an uppercase, a lowercase letter, & be at least 6 characters long.
