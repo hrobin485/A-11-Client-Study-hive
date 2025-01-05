@@ -47,7 +47,7 @@ const PendingAssignments = () => {
   }
 
   return (
-    <div className="container mx-auto p-4 ">
+    <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Pending Assignments</h1>
       <table className="min-w-full table-auto border-collapse border border-gray-400">
         <thead>
@@ -65,13 +65,14 @@ const PendingAssignments = () => {
               <td className="border border-gray-400 px-4 py-2">{submission.marks}</td>
               <td className="border border-gray-400 px-4 py-2">{submission.email}</td>
               <td className="border border-gray-400 px-4 py-2">
+                {user && user.email !== submission.email && (
                   <button
                     onClick={() => handleGiveMark(submission._id, submission.email)}
                     className="bg-blue-500 text-white px-4 py-2 rounded"
                   >
                     Give Mark
                   </button>
-                
+                )}
               </td>
             </tr>
           ))}
