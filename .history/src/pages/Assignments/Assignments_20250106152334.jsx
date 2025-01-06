@@ -97,9 +97,9 @@ const Assignments = () => {
       <h1 className="text-3xl font-bold mb-4">Assignments</h1>
 
       {/* Search and Filter Section */}
-      <div className="ml-10 flex gap-96 mb-4">
+      <div className="flex">
         {/* Search Input */}
-        <div className='space-x-3'>
+        <div>
         <input
           type="text"
           value={searchTerm}
@@ -115,7 +115,7 @@ const Assignments = () => {
         </button>
         </div>
         {/* Difficulty Dropdown */}
-       <div className='space-x-3'> 
+       <div>
        <select
           value={difficulty}
           onChange={(e) => setDifficulty(e.target.value)}

@@ -97,7 +97,7 @@ const Assignments = () => {
       <h1 className="text-3xl font-bold mb-4">Assignments</h1>
 
       {/* Search and Filter Section */}
-      <div className="ml-10 flex gap-96 mb-4">
+      <div className="flex gap-96 mb-4">
         {/* Search Input */}
         <div className='space-x-3'>
         <input

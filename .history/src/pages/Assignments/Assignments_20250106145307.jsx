@@ -1,31 +1,26 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext/AuthContext';
 
 const Assignments = () => {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(''); // For the search input
-  const [difficulty, setDifficulty] = useState(''); // For the difficulty filter
+  const [difficultyFilter, setDifficultyFilter] = useState(''); // Filter for difficulty level
+  const [searchQuery, setSearchQuery] = useState(''); // Search query
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext); // Get current logged-in user
 
-  // Fetch assignments with optional filters
-  const fetchAssignments = async () => {
+  // Fetch assignments from the API
+  const fetchAssignments = async (filter = '', query = '') => {
+    setLoading(true);
     try {
-      setLoading(true);
-
-      // Build query parameters for search and filter
-      const queryParams = new URLSearchParams();
-      if (difficulty) queryParams.append('difficulty', difficulty);
-      if (searchTerm) queryParams.append('search', searchTerm);
-
-      const response = await fetch(`https://server-side-study-hive.vercel.app/assignments?${queryParams}`);
+      const response = await fetch(
+        `https://server-side-study-hive.vercel.app/assignments?difficulty=${filter}&search=${query}`
+      );
       if (!response.ok) {
         throw new Error('Failed to fetch assignments');
       }
-
       const data = await response.json();
       setAssignments(data);
       setLoading(false);
@@ -35,9 +30,10 @@ const Assignments = () => {
     }
   };
 
+  // Fetch assignments on component mount and whenever filter or search changes
   useEffect(() => {
-    fetchAssignments();
-  }, []); // Fetch assignments initially
+    fetchAssignments(difficultyFilter, searchQuery);
+  }, [difficultyFilter, searchQuery]);
 
   const handleDelete = async (id) => {
     const assignmentToDelete = assignments.find((assignment) => assignment._id === id);
@@ -80,10 +76,6 @@ const Assignments = () => {
     navigate(`/UpdateAssignment/${id}`);
   };
 
-  const handleSearch = () => {
-    fetchAssignments(); // Trigger the search when the button is clicked
-  };
-
   if (loading) {
     return <div>Loading assignments...</div>;
   }
@@ -96,43 +88,30 @@ const Assignments = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Assignments</h1>
 
-      {/* Search and Filter Section */}
-      <div className="ml-10 flex gap-96 mb-4">
-        {/* Search Input */}
-        <div className='space-x-3'>
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search by title..."
-          className="border border-gray-400 rounded px-4 py-2"
-        />
-        <button
-          onClick={handleSearch} // Trigger search
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Search
-        </button>
+      {/* Filter and Search Section */}
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <label className="mr-2 font-semibold">Filter by Difficulty:</label>
+          <select
+            value={difficultyFilter}
+            onChange={(e) => setDifficultyFilter(e.target.value)}
+            className="border border-gray-300 rounded px-2 py-1"
+          >
+            <option value="">All</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
         </div>
-        {/* Difficulty Dropdown */}
-       <div className='space-x-3'> 
-       <select
-          value={difficulty}
-          onChange={(e) => setDifficulty(e.target.value)}
-          className="border border-gray-400 rounded px-4 py-2"
-        >
-          <option value="">All Difficulties</option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-        <button
-          onClick={fetchAssignments} // Trigger filter
-          className="bg-green-500 text-white px-4 py-2 rounded"
-        >
-          Filter
-        </button>
-       </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Search by title"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="border border-gray-300 rounded px-4 py-2"
+          />
+        </div>
       </div>
 
       {/* Assignments Table */}

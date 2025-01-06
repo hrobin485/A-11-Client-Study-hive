@@ -97,9 +97,8 @@ const Assignments = () => {
       <h1 className="text-3xl font-bold mb-4">Assignments</h1>
 
       {/* Search and Filter Section */}
-      <div className="ml-10 flex gap-96 mb-4">
+      <div className="flex items-center space-x-4 mb-6">
         {/* Search Input */}
-        <div className='space-x-3'>
         <input
           type="text"
           value={searchTerm}
@@ -113,10 +112,9 @@ const Assignments = () => {
         >
           Search
         </button>
-        </div>
+
         {/* Difficulty Dropdown */}
-       <div className='space-x-3'> 
-       <select
+        <select
           value={difficulty}
           onChange={(e) => setDifficulty(e.target.value)}
           className="border border-gray-400 rounded px-4 py-2"
@@ -132,7 +130,6 @@ const Assignments = () => {
         >
           Filter
         </button>
-       </div>
       </div>
 
       {/* Assignments Table */}
