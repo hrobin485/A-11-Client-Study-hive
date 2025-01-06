@@ -11,7 +11,7 @@ const MyAttemptedAssignments = () => {
       
       try {
         // Fetch assignments filtered by the user's email
-        const response = await fetch(`http://localhost:5000/submissions?email=${userEmail}`);
+        const response = await fetch(`https://server-side-study-hive.vercel.app/submissions?email=${userEmail}`);
         if (!response.ok) {
           throw new Error('Failed to fetch attempted assignments.');
         }

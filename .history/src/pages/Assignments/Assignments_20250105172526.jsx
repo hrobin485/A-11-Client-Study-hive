@@ -12,7 +12,7 @@ const Assignments = () => {
   useEffect(() => {
     const fetchAssignments = async () => {
       try {
-        const response = await fetch('http://localhost:5000/assignments');
+        const response = await fetch('https://server-side-study-hive.vercel.app/assignments');
         if (!response.ok) {
           throw new Error('Failed to fetch assignments');
         }
@@ -44,7 +44,7 @@ const Assignments = () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this assignment?');
     if (confirmDelete) {
       try {
-        const response = await fetch(`http://localhost:5000/assignments/${id}`, {
+        const response = await fetch(`https://server-side-study-hive.vercel.app/assignments/${id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

@@ -12,7 +12,7 @@ const PendingAssignments = () => {
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {
-        const response = await fetch('http://localhost:5000/submissions');
+        const response = await fetch('https://server-side-study-hive.vercel.app/submissions');
         if (!response.ok) {
           throw new Error('Failed to fetch submissions.');
         }

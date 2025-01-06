@@ -12,7 +12,7 @@ const GiveMark = () => {
   useEffect(() => {
     const fetchSubmission = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/submission/${submissionId}`);
+        const response = await fetch(`https://server-side-study-hive.vercel.app/submission/${submissionId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch submission details.');
         }
@@ -32,7 +32,7 @@ const GiveMark = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:5000/give-mark/${submissionId}`, {
+      const response = await fetch(`https://server-side-study-hive.vercel.app/give-mark/${submissionId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

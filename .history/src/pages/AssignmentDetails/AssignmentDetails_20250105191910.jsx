@@ -12,7 +12,7 @@ const AssignmentDetails = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/submitAssignment", {
+      const response = await fetch("https://server-side-study-hive.vercel.app/submitAssignment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

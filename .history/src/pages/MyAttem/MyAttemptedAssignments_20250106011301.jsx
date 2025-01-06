@@ -12,7 +12,7 @@ const MyAttemptedAssignments = () => {
       if (!user) return; // If no user is logged in, do nothing
 
       try {
-        const response = await fetch(`http://localhost:5000/submissions?email=${user.email}`);
+        const response = await fetch(`https://server-side-study-hive.vercel.app/submissions?email=${user.email}`);
         if (!response.ok) {
           throw new Error('Failed to fetch attempted assignments.');
         }

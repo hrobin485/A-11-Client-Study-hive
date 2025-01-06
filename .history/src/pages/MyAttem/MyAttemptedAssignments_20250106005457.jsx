@@ -14,7 +14,7 @@ const MyAttemptedAssignments = () => {
         userEmail = "logged-in-user-email"; // Placeholder, replace this with actual user email retrieval logic
         console.log('Fetched user email:', userEmail); // Debugging user email
         
-        const response = await fetch(`http://localhost:5000/submissions?email=${userEmail}`);
+        const response = await fetch(`https://server-side-study-hive.vercel.app/submissions?email=${userEmail}`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch attempted assignments.');

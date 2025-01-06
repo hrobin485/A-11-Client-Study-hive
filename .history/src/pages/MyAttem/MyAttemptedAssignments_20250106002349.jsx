@@ -7,7 +7,7 @@ const MyAttemptedAssignments = ({ userEmail }) => {
 
   const fetchAssignments = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/attempted-assignments?email=${userEmail}`);
+      const response = await fetch(`https://server-side-study-hive.vercel.app/attempted-assignments?email=${userEmail}`);
       if (!response.ok) {
         throw new Error(await response.text());
       }

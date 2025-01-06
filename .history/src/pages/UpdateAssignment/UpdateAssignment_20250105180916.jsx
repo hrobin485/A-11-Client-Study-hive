@@ -18,7 +18,7 @@ const UpdateAssignment = () => {
   useEffect(() => {
     const fetchAssignment = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/assignments/${id}`);
+        const response = await fetch(`https://server-side-study-hive.vercel.app/assignments/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch assignment.');
         }
@@ -62,7 +62,7 @@ const UpdateAssignment = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/assignments/${id}`, {
+      const response = await fetch(`https://server-side-study-hive.vercel.app/assignments/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

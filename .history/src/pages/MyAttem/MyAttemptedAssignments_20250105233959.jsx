@@ -8,7 +8,7 @@ const MyAttemptedAssignment = ({ userEmail }) => {
   useEffect(() => {
     const fetchAssignments = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/MyAttemptedAssignment?email=${userEmail}`);
+        const response = await fetch(`https://server-side-study-hive.vercel.app/MyAttemptedAssignment?email=${userEmail}`);
         if (!response.ok) {
           throw new Error('Failed to fetch assignments.');
         }

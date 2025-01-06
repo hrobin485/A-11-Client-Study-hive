@@ -8,7 +8,7 @@ const Assignments = () => {
   useEffect(() => {
     const fetchAssignments = async () => {
       try {
-        const response = await fetch('http://localhost:5000/assignments'); // Fetch data from the backend
+        const response = await fetch('https://server-side-study-hive.vercel.app/assignments'); // Fetch data from the backend
         if (!response.ok) {
           throw new Error('Failed to fetch assignments');
         }
