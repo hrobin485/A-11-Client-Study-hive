@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add this for dark mode */
+:root {
+  --color-bg: #f9fafb; /* Default light background */
+  --color-text: #1f2937; /* Default light text */
+}
+
+[data-theme='dark'] {
+  --color-bg: #1f2937; /* Dark background */
+  --color-text: #f9fafb; /* Dark text */
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

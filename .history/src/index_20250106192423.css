@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: var(--bg);
+    color: var(--text-color);
+  }
+  
+  a, button {
+    color: var(--text-color);
+  }
+  
+  .table-auto {
+    background-color: var(--bg);
+    border-color: var(--border-color);
+  }
+  
+  .navbar {
+    background-color: var(--bg);
+  }
+  

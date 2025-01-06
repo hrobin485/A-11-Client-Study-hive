@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg-light: #ffffff; /* Light mode background */
+    --bg-dark: #1a202c;   /* Dark mode background */
+    --text-light: #1a202c; /* Light mode text */
+    --text-dark: #ffffff;  /* Dark mode text */
+  }
+  
+  .dark {
+    --bg: var(--bg-dark);
+    --text-color: var(--text-dark);
+  }
+  
+  .light {
+    --bg: var(--bg-light);
+    --text-color: var(--text-light);
+  }
+  
+  body {
+    background-color: var(--bg);
+    color: var(--text-color);
+  }
+  
+  /* Adjust other components as well */
+  .navbar {
+    background-color: var(--bg);
+  }
+  
+  button, a {
+    color: var(--text-color);
+  }
+  
+  
