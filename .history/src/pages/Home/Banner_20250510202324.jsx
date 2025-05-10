@@ -7,7 +7,7 @@ const Banner = () => {
       
         <div className="hero bg-base-200 min-h-96 mt-5 rounded-xl dark:bg-gray-800  dark:text-gray-100">
             <div className="lg:ml-20 hero-content flex-col lg:flex-row-reverse">
-                <div className='flex-1 -ml-16  lg:ml-16'>
+                <div className='flex-1 -ml-16'>
                     <motion.img
                         src={team2}
                         animate={{ y: [50, 100, 50] }}

@@ -5,7 +5,9 @@
   transition: background-color 0.3s ease;
 }
 
-
+.feature-section.dark {
+  background-color: #1f2937;
+}
 
 .feature-header {
   text-align: center;
@@ -23,7 +25,9 @@
   color: #6b7280;
 }
 
-
+.feature-subtitle.dark {
+  color: #d1d5db;
+}
 
 .feature-card {
   background-color: #ffffff;
@@ -39,7 +43,9 @@
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
-
+.feature-card.dark {
+  background-color: #2d3748;
+}
 
 .feature-icon {
   font-size: 2.5rem;
@@ -57,7 +63,9 @@
   color: #4b5563;
 }
 
-
+.feature-card-description.dark {
+  color: #d1d5db;
+}
 
 /* Grid layout with gap */
 .feature-cards {

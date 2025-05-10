@@ -1,0 +1,50 @@
+.feature-section {
+  padding: 2rem;
+  background-color: #f9fafb;
+}
+
+.feature-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.feature-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.feature-subtitle {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+
+
+.feature-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1 rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.feature-card-description {
+  font-size: 1rem;
+  color: #666;
+}

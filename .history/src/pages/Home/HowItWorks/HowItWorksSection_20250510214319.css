@@ -1,11 +1,13 @@
-.feature-section {
+.how-it-works-section {
   background-color: #f9fafb;
   padding: 2rem;
   border-radius: 1rem;
   transition: background-color 0.3s ease;
 }
 
-
+.how-it-works-section.dark {
+  background-color: #1f2937;
+}
 
 .feature-header {
   text-align: center;
@@ -23,9 +25,11 @@
   color: #6b7280;
 }
 
+.feature-subtitle.dark {
+  color: #d1d5db;
+}
 
-
-.feature-card {
+.how-it-step {
   background-color: #ffffff;
   border-radius: 1rem;
   padding: 1.5rem;
@@ -34,52 +38,31 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.feature-card:hover {
+.how-it-step:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
+.how-it-step.dark {
+  background-color: #2d3748;
+}
 
-
-.feature-icon {
+.how-it-icon {
   font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
-.feature-card-title {
+.how-it-title {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-.feature-card-description {
+.how-it-description {
   font-size: 0.95rem;
   color: #4b5563;
 }
 
-
-
-/* Grid layout with gap */
-.feature-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 640px) {
-  .feature-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 768px) {
-  .feature-cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .feature-cards {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.how-it-description.dark {
+  color: #d1d5db;
 }

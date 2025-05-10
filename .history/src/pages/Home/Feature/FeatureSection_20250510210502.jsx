@@ -34,10 +34,9 @@ const FeatureSection = () => {
           growth.
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="">
         {features.map((feature, index) => (
-          <div key={index} className="feature-card dark:bg-gray-700
-          dark:text-gray-100">
+          <div key={index} className="feature-card  dark:bg-gray-800 dark:text-gray-100">
             <div className="feature-icon">{feature.icon}</div>
             <h3 className="feature-card-title">{feature.title}</h3>
             <p className="feature-card-description dark:text-gray-100">{feature.description}</p>
