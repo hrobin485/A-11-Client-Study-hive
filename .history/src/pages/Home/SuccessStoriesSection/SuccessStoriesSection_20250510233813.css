@@ -1,0 +1,16 @@
+.success-section {
+  background-color: #f9fafb;
+  transition: background-color 0.3s ease;
+}
+
+.success-section.dark {
+  background-color: #1f2937;
+}
+
+.story-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.story-card:hover {
+  transform: translateY(-4px);
+}
