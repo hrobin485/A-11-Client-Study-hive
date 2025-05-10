@@ -1,0 +1,54 @@
+.unique-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background: #f0f4f8;
+  padding: 60px 30px;
+  border-radius: 1rem;
+  margin: 60px 0;
+}
+
+.unique-text {
+  flex: 1 1 450px;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.unique-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+
+.unique-description {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.unique-points {
+  list-style: none;
+  padding: 0;
+}
+
+.unique-points li {
+  font-size: 1rem;
+  margin: 10px 0;
+  color: #374151;
+}
+
+.unique-image {
+  flex: 1 1 350px;
+  max-width: 450px;
+  padding: 20px;
+  text-align: center;
+}
+
+.unique-image img {
+  width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
