@@ -66,7 +66,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="md:text-right">
             <h3 className="font-semibold text-gray-800 dark:text-white mb-2">Legal</h3>
-            <p>© 2025 StudyHive</p>
+            <p>© 2024 StudyHive</p>
             <p>All Rights Reserved.</p>
           </div>
         </div>
