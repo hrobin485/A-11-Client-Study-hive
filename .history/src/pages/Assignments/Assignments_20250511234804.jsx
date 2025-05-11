@@ -153,7 +153,7 @@ const Assignments = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by title..."
-            className="border border-gray-400 rounded px-4 py-2 dark:bg-gray-700 dark:text-gray-100"
+            className="border border-gray-400 rounded px-4 py-2 dark:text-gray-100"
           />
           <button
             onClick={handleSearch}
