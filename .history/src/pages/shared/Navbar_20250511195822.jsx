@@ -27,42 +27,13 @@ const Navbar = () => {
         }
     };
 
- const links = (
-  <>
-    <li>
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
-        }
-      >
-        Home
-      </NavLink>
-    </li>
-    <li>
-      <NavLink
-        to="/Assignments"
-        className={({ isActive }) =>
-          `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
-        }
-      >
-        Assignments
-      </NavLink>
-    </li>
-    <li>
-      <NavLink
-        to="/PendingAssignments"
-        className={({ isActive }) =>
-          `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
-        }
-      >
-        Pending Assignments
-      </NavLink>
-    </li>
-  </>
-);
-
-
+    const links = (
+        <>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/Assignments">Assignments</NavLink></li>
+            <li className='dark:text-gray-100'><NavLink to="/PendingAssignments">Pending Assignments</NavLink></li>
+        </>
+    );
 
     return (
         <div className="navbar bg-slate-300 dark:bg-gray-800 text-black dark:text-gray-100 rounded-lg">

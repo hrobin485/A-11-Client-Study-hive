@@ -27,13 +27,15 @@ const Navbar = () => {
         }
     };
 
- const links = (
+    const links = (
   <>
     <li>
       <NavLink
         to="/"
         className={({ isActive }) =>
-          `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
+          isActive
+            ? "text-blue-600 font-semibold dark:text-gray-100"
+            : "hover:text-blue-500 dark:hover:text-gray-100"
         }
       >
         Home
@@ -43,7 +45,9 @@ const Navbar = () => {
       <NavLink
         to="/Assignments"
         className={({ isActive }) =>
-          `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
+          isActive
+            ? "text-blue-600 font-semibold dark:text-gray-100"
+            : "hover:text-blue-500 dark:hover:text-gray-100"
         }
       >
         Assignments
@@ -53,7 +57,9 @@ const Navbar = () => {
       <NavLink
         to="/PendingAssignments"
         className={({ isActive }) =>
-          `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
+          isActive
+            ? "text-blue-600 font-semibold dark:text-gray-100"
+            : "hover:text-blue-500 dark:hover:text-gray-100"
         }
       >
         Pending Assignments
@@ -61,7 +67,6 @@ const Navbar = () => {
     </li>
   </>
 );
-
 
 
     return (

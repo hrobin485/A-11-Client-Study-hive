@@ -27,47 +27,18 @@ const Navbar = () => {
         }
     };
 
- const links = (
-  <>
-    <li>
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
-        }
-      >
-        Home
-      </NavLink>
-    </li>
-    <li>
-      <NavLink
-        to="/Assignments"
-        className={({ isActive }) =>
-          `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
-        }
-      >
-        Assignments
-      </NavLink>
-    </li>
-    <li>
-      <NavLink
-        to="/PendingAssignments"
-        className={({ isActive }) =>
-          `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
-        }
-      >
-        Pending Assignments
-      </NavLink>
-    </li>
-  </>
-);
-
-
+    const links = (
+        <>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/Assignments">Assignments</NavLink></li>
+            <li><NavLink to="/PendingAssignments">Pending Assignments</NavLink></li>
+        </>
+    );
 
     return (
-        <div className="navbar bg-slate-300 dark:bg-gray-800 text-black dark:text-gray-100 rounded-lg">
+        <div className="navbar bg-slate-300 dark:bg-gray-900 text-black dark:text-white rounded-lg">
             <div className="navbar-start">
-                <div className="dropdown">
+                <div className="dropdown dark:bg-gray-800 dark:text-gray-100">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +55,7 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-white dark:bg-gray-800 dark:text-gray-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         {links}
                     </ul>
                 </div>

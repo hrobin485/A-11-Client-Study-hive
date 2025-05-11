@@ -1,7 +1,6 @@
 import React from 'react';
 import { easeOut, motion } from "framer-motion";
 import team2 from '../../assets/team/team2.jpg';
-import { Link} from 'react-router-dom';
 
 const Banner = () => {
     return ( 

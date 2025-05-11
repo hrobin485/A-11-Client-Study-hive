@@ -48,7 +48,7 @@ const PendingAssignments = () => {
   }
 
   if (error) {
-    return <div className='dark:text-gray-100'>Error: {error}</div>;
+    return <div>Error: {error}</div>;
   }
 
   return (

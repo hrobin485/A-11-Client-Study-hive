@@ -3,26 +3,30 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
 
+
 const Assignments = () => {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [difficulty, setDifficulty] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); // For the search input
+  const [difficulty, setDifficulty] = useState(''); // For the difficulty filter
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-  const isDarkMode = () => document.documentElement.classList.contains('dark');
-
+  // Fetch assignments with optional filters
   const fetchAssignments = async () => {
     try {
       setLoading(true);
+
+      // Build query parameters for search and filter
       const queryParams = new URLSearchParams();
       if (difficulty) queryParams.append('difficulty', difficulty);
       if (searchTerm) queryParams.append('search', searchTerm);
 
       const response = await fetch(`https://server-side-study-hive.vercel.app/assignments?${queryParams}`);
-      if (!response.ok) throw new Error('Failed to fetch assignments');
+      if (!response.ok) {
+        throw new Error('Failed to fetch assignments');
+      }
 
       const data = await response.json();
       setAssignments(data);
@@ -30,42 +34,23 @@ const Assignments = () => {
     } catch (error) {
       setError(error.message);
       setLoading(false);
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: error.message,
-        background: isDarkMode() ? '#1f2937' : '#fff',
-        color: isDarkMode() ? '#f3f4f6' : '#000',
-      });
     }
   };
 
   useEffect(() => {
     fetchAssignments();
-  }, []);
+  }, []); // Fetch assignments initially
 
   const handleDelete = async (id) => {
     const assignmentToDelete = assignments.find((assignment) => assignment._id === id);
 
     if (!assignmentToDelete) {
-      Swal.fire({
-        title: 'Error',
-        text: 'Assignment not found!',
-        icon: 'error',
-        background: isDarkMode() ? '#1f2937' : '#fff',
-        color: isDarkMode() ? '#f3f4f6' : '#000',
-      });
+       Swal.fire('Error', 'Assignment not found!', 'error');
       return;
     }
 
     if (assignmentToDelete.email !== user.email) {
-      Swal.fire({
-        title: 'Unauthorized',
-        text: 'You can only delete your own assignments.',
-        icon: 'warning',
-        background: isDarkMode() ? '#1f2937' : '#fff',
-        color: isDarkMode() ? '#f3f4f6' : '#000',
-      });
+      Swal.fire('Unauthorized', 'You can only delete your own assignments.', 'warning');
       return;
     }
 
@@ -76,9 +61,7 @@ const Assignments = () => {
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!',
-      background: isDarkMode() ? '#1f2937' : '#fff',
-      color: isDarkMode() ? '#f3f4f6' : '#000',
+      confirmButtonText: 'Yes, delete it!'
     });
 
     if (result.isConfirmed) {
@@ -91,31 +74,13 @@ const Assignments = () => {
 
         if (response.ok) {
           setAssignments(assignments.filter((a) => a._id !== id));
-          Swal.fire({
-            title: 'Deleted!',
-            text: 'Assignment has been deleted.',
-            icon: 'success',
-            background: isDarkMode() ? '#1f2937' : '#fff',
-            color: isDarkMode() ? '#f3f4f6' : '#000',
-          });
+          Swal.fire('Deleted!', 'Assignment has been deleted.', 'success');
         } else {
           const errorMsg = await response.json();
-          Swal.fire({
-            title: 'Failed!',
-            text: `Failed to delete assignment: ${errorMsg}`,
-            icon: 'error',
-            background: isDarkMode() ? '#1f2937' : '#fff',
-            color: isDarkMode() ? '#f3f4f6' : '#000',
-          });
+          Swal.fire('Failed!', `Failed to delete assignment: ${errorMsg}`, 'error');
         }
       } catch (error) {
-        Swal.fire({
-          title: 'Error',
-          text: 'Failed to delete the assignment.',
-          icon: 'error',
-          background: isDarkMode() ? '#1f2937' : '#fff',
-          color: isDarkMode() ? '#f3f4f6' : '#000',
-        });
+        Swal.fire('Error', 'Failed to delete the assignment.', 'error');
       }
     }
   };
@@ -125,20 +90,20 @@ const Assignments = () => {
   };
 
   const handleSearch = () => {
-    fetchAssignments();
+    fetchAssignments(); // Trigger the search when the button is clicked
   };
 
   if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[200px] dark:text-gray-100">
-        <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-        <p className="mt-4 text-lg">Loading assignments...</p>
-      </div>
-    );
+     return (
+    <div className="flex flex-col items-center justify-center min-h-[200px] dark:text-gray-100">
+      <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+      <p className="mt-4 text-lg">Loading assignments...</p>
+    </div>
+  );
   }
 
   if (error) {
-    return <div className="dark:text-gray-100">Error: {error}</div>;
+    return <div className='dark:text-gray-100'>Error: {error}</div>;
   }
 
   return (
@@ -147,39 +112,41 @@ const Assignments = () => {
 
       {/* Search and Filter Section */}
       <div className="ml-10 flex gap-96 mb-4">
-        <div className="space-x-3">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search by title..."
-            className="border border-gray-400 rounded px-4 py-2"
-          />
-          <button
-            onClick={handleSearch}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            Search
-          </button>
+        {/* Search Input */}
+        <div className='space-x-3'>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search by title..."
+          className="border border-gray-400 rounded px-4 py-2"
+        />
+        <button
+          onClick={handleSearch} // Trigger search
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Search
+        </button>
         </div>
-        <div className="space-x-3">
-          <select
-            value={difficulty}
-            onChange={(e) => setDifficulty(e.target.value)}
-            className="border border-gray-400 rounded px-4 py-2 dark:bg-gray-800 dark:text-gray-100"
-          >
-            <option value="">All Difficulties</option>
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-          </select>
-          <button
-            onClick={fetchAssignments}
-            className="bg-green-500 text-white px-4 py-2 rounded"
-          >
-            Filter
-          </button>
-        </div>
+        {/* Difficulty Dropdown */}
+       <div className='space-x-3'> 
+       <select
+          value={difficulty}
+          onChange={(e) => setDifficulty(e.target.value)}
+          className="border border-gray-400 rounded px-4 py-2  dark:bg-gray-800 dark:text-gray-100"
+        >
+          <option value="">All Difficulties</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <button
+          onClick={fetchAssignments} // Trigger filter
+          className="bg-green-500 text-white px-4 py-2 rounded"
+        >
+          Filter
+        </button>
+       </div>
       </div>
 
       {/* Assignments Table */}
