@@ -146,7 +146,7 @@ const Assignments = () => {
       <h1 className="text-3xl font-bold mb-4">Assignments</h1>
 
       {/* Search and Filter Section */}
-      <div className="gap-y-3 lg:ml-10 lg:flex lg:gap-96 mb-4">
+      <div className="lg:ml-10 flex lg:gap-96 mb-4">
         <div className="space-x-3">
           <input
             type="text"

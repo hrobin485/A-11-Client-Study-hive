@@ -9,8 +9,6 @@ const GiveMark = () => {
   const [feedback, setFeedback] = useState('');
   const navigate = useNavigate();
 
- const isDarkMode = () => document.documentElement.classList.contains('dark');
-
   useEffect(() => {
     const fetchSubmissionDetails = async () => {
       try {
@@ -20,7 +18,7 @@ const GiveMark = () => {
         }
         const data = await response.json();
         setSubmission(data);
-        setObtainMarks(data.obtainMarks || '');
+        setObtainMarks(data.obtainMarks || ''); // Set existing obtain marks if available
       } catch (error) {
         console.error(error);
       }
@@ -33,13 +31,7 @@ const GiveMark = () => {
     e.preventDefault();
 
     if (!obtainMarks || !feedback) {
-      Swal.fire({
-        title: 'Validation Error',
-        text: 'Marks and feedback are required.',
-        icon: 'warning',
-        background: isDarkMode() ? '#1f2937' : '#fff',
-        color: isDarkMode() ? '#f3f4f6' : '#000',
-      });
+      alert('Marks and feedback are required.');
       return;
     }
 
@@ -53,45 +45,20 @@ const GiveMark = () => {
       });
 
       if (response.ok) {
-        Swal.fire({
-          title: 'Success!',
-          text: 'Marks given successfully!',
-          icon: 'success',
-          background: isDarkMode() ? '#1f2937' : '#fff',
-          color: isDarkMode() ? '#f3f4f6' : '#000',
-        }).then(() => {
-          navigate('/PendingAssignments');
-        });
+        alert('Marks given successfully!');
+        navigate('/PendingAssignments'); // Redirect to pending assignments page
       } else {
         const errorMsg = await response.text();
-        Swal.fire({
-          title: 'Error!',
-          text: `Failed to give marks: ${errorMsg}`,
-          icon: 'error',
-          background: isDarkMode() ? '#1f2937' : '#fff',
-          color: isDarkMode() ? '#f3f4f6' : '#000',
-        });
+        alert(`Failed to give marks: ${errorMsg}`);
       }
     } catch (error) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Failed to give marks. Please try again later.',
-        icon: 'error',
-        background: isDarkMode() ? '#1f2937' : '#fff',
-        color: isDarkMode() ? '#f3f4f6' : '#000',
-      });
+      alert('Error: Failed to give marks.');
     }
   };
 
-
   if (!submission) {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-[200px] dark:text-gray-100">
-        <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-        <p className="mt-4 text-lg">Loading Submission Assignment...</p>
-      </div>
-  );
-}
+    return <div className='dark:text-gray-100'>Loading submission details...</div>;
+  }
 
   return (
     <div className="container mx-auto p-4 dark:bg-gray-800 dark:text-gray-100">

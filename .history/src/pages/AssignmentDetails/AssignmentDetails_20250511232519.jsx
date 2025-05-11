@@ -73,7 +73,6 @@ const AssignmentDetails = () => {
           color: isDarkMode() ? '#f3f4f6' : '#000',
         });
         setShowModal(false);
-        navigate('/Assignments'); 
       } else {
         const errorMsg = await response.text();
         Swal.fire({

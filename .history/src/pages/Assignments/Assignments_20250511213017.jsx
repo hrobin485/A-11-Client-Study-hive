@@ -146,7 +146,7 @@ const Assignments = () => {
       <h1 className="text-3xl font-bold mb-4">Assignments</h1>
 
       {/* Search and Filter Section */}
-      <div className="gap-y-3 lg:ml-10 lg:flex lg:gap-96 mb-4">
+      <div className="ml-10 flex gap-96 mb-4">
         <div className="space-x-3">
           <input
             type="text"
@@ -183,8 +183,7 @@ const Assignments = () => {
       </div>
 
       {/* Assignments Table */}
-      <div className='overflow-y-auto max-w-full'>
-        <table className="table-auto  border-collapse border border-gray-400 overflow-y-auto">
+      <table className="  border-collapse border border-gray-400 overflow-y-auto">
         <thead>
           <tr>
             <th className="border border-gray-400 px-4 py-2">Thumbnail</th>
@@ -235,7 +234,6 @@ const Assignments = () => {
           ))}
         </tbody>
       </table>
-      </div>
     </div>
   );
 };

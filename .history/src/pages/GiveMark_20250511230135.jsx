@@ -60,7 +60,7 @@ const GiveMark = () => {
           background: isDarkMode() ? '#1f2937' : '#fff',
           color: isDarkMode() ? '#f3f4f6' : '#000',
         }).then(() => {
-          navigate('/PendingAssignments');
+          navigate('/pending-assignments');
         });
       } else {
         const errorMsg = await response.text();

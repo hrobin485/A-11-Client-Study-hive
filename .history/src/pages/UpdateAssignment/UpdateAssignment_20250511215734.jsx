@@ -57,52 +57,31 @@ const UpdateAssignment = () => {
     }));
   };
 
-const isDarkMode = () => document.documentElement.classList.contains("dark");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    try {
+        const response = await fetch(`https://server-side-study-hive.vercel.app/assignments/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                ...assignment,
+                email: user.email, // Include the logged-in user's email
+            }),
+        });
 
-  try {
-    const response = await fetch(`https://server-side-study-hive.vercel.app/assignments/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...assignment,
-        email: user.email, // Include the logged-in user's email
-      }),
-    });
-
-    if (response.ok) {
-      Swal.fire({
-        title: 'Success!',
-        text: 'Assignment updated successfully!',
-        icon: 'success',
-        background: isDarkMode() ? '#1f2937' : '#fff',
-        color: isDarkMode() ? '#f3f4f6' : '#000',
-      }).then(() => {
-        navigate('/assignments'); // Redirect after user clicks OK
-      });
-    } else {
-      const errorMsg = await response.text();
-      Swal.fire({
-        title: 'Failed!',
-        text: `Failed to update assignment: ${errorMsg}`,
-        icon: 'error',
-        background: isDarkMode() ? '#1f2937' : '#fff',
-        color: isDarkMode() ? '#f3f4f6' : '#000',
-      });
+        if (response.ok) {
+            alert('Assignment updated successfully!');
+            navigate('/assignments'); // Redirect to assignments page
+        } else {
+            const errorMsg = await response.text(); // Get error message from server
+            alert(`Failed to update assignment: ${errorMsg}`);
+        }
+    } catch (error) {
+        alert('Error: Failed to update the assignment.');
     }
-  } catch (error) {
-    Swal.fire({
-      title: 'Error!',
-      text: 'Failed to update the assignment.',
-      icon: 'error',
-      background: isDarkMode() ? '#1f2937' : '#fff',
-      color: isDarkMode() ? '#f3f4f6' : '#000',
-    });
-  }
 };
 
 

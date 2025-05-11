@@ -60,7 +60,7 @@ const GiveMark = () => {
           background: isDarkMode() ? '#1f2937' : '#fff',
           color: isDarkMode() ? '#f3f4f6' : '#000',
         }).then(() => {
-          navigate('/PendingAssignments');
+          navigate('/pending-assignments');
         });
       } else {
         const errorMsg = await response.text();
@@ -85,13 +85,8 @@ const GiveMark = () => {
 
 
   if (!submission) {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-[200px] dark:text-gray-100">
-        <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-        <p className="mt-4 text-lg">Loading Submission Assignment...</p>
-      </div>
-  );
-}
+    return <div className='dark:text-gray-100'>Loading submission details...</div>;
+  }
 
   return (
     <div className="container mx-auto p-4 dark:bg-gray-800 dark:text-gray-100">

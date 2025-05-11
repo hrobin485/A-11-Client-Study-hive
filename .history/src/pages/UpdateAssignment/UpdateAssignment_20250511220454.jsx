@@ -57,24 +57,22 @@ const UpdateAssignment = () => {
     }));
   };
 
-const isDarkMode = () => document.documentElement.classList.contains("dark");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    try {
+        const response = await fetch(`https://server-side-study-hive.vercel.app/assignments/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                ...assignment,
+                email: user.email, // Include the logged-in user's email
+            }),
+        });
 
-  try {
-    const response = await fetch(`https://server-side-study-hive.vercel.app/assignments/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...assignment,
-        email: user.email, // Include the logged-in user's email
-      }),
-    });
-
-    if (response.ok) {
+   if (response.ok) {
       Swal.fire({
         title: 'Success!',
         text: 'Assignment updated successfully!',

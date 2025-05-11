@@ -13,8 +13,6 @@ const AssignmentDetails = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext); // Get current user
 
- const isDarkMode = () => document.documentElement.classList.contains('dark');
-
   useEffect(() => {
     const fetchAssignment = async () => {
       try {
@@ -36,83 +34,51 @@ const AssignmentDetails = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     if (!submission.googleDocsLink || !submission.notes) {
-      Swal.fire({
-        title: 'Required Fields Missing',
-        text: 'Google Docs Link and Notes are required.',
-        icon: 'warning',
-        background: isDarkMode() ? '#1f2937' : '#fff',
-        color: isDarkMode() ? '#f3f4f6' : '#000',
-      });
-      return;
+        alert('Google Docs Link and Notes are required.');
+        return;
     }
-
+    
     try {
-      const response = await fetch('https://server-side-study-hive.vercel.app/submissions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          assignmentId: id,
-          assignmentTitle: assignment.title,
-          googleDocsLink: submission.googleDocsLink,
-          notes: submission.notes,
-          email: user.email,
-          status: 'pending',
-        }),
-      });
-
-      if (response.ok) {
-        Swal.fire({
-          title: 'Success',
-          text: 'Assignment submitted successfully!',
-          icon: 'success',
-          background: isDarkMode() ? '#1f2937' : '#fff',
-          color: isDarkMode() ? '#f3f4f6' : '#000',
+        const response = await fetch('https://server-side-study-hive.vercel.app/submissions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                assignmentId: id,
+                assignmentTitle: assignment.title,
+                googleDocsLink: submission.googleDocsLink,
+                notes: submission.notes,
+                email: user.email, // Logged-in user's email
+                status: 'pending',
+            }),
         });
-        setShowModal(false);
-        navigate('/Assignments'); 
-      } else {
-        const errorMsg = await response.text();
-        Swal.fire({
-          title: 'Submission Failed',
-          text: errorMsg,
-          icon: 'error',
-          background: isDarkMode() ? '#1f2937' : '#fff',
-          color: isDarkMode() ? '#f3f4f6' : '#000',
-        });
-      }
+        
+        if (response.ok) {
+            alert('Assignment submitted successfully!');
+            setShowModal(false); // Close modal
+        } else {
+            const errorMsg = await response.text();
+            alert(`Failed to submit assignment: ${errorMsg}`);
+        }
     } catch (error) {
-      Swal.fire({
-        title: 'Error',
-        text: 'Failed to submit assignment.',
-        icon: 'error',
-        background: isDarkMode() ? '#1f2937' : '#fff',
-        color: isDarkMode() ? '#f3f4f6' : '#000',
-      });
+        alert('Error: Failed to submit assignment.');
     }
-  };
+};
 
+  
+  
   if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[200px] dark:text-gray-100">
+    return <div className="flex flex-col items-center justify-center min-h-[200px] dark:text-gray-100">
         <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-        <p className="mt-4 text-lg">Loading assignments details...</p>
-      </div>
-    );
+        <p className="mt-4 text-lg">Loading assignments detailss...</p>
+      </div>;
   }
 
   if (error) {
-    Swal.fire({
-      title: 'Error',
-      text: error,
-      icon: 'error',
-      background: isDarkMode() ? '#1f2937' : '#fff',
-      color: isDarkMode() ? '#f3f4f6' : '#000',
-    });
-    return <div className='dark:text-gray-100'>Error occurred.</div>;
+    return <div>Error: {error}</div>;
   }
 
   return (

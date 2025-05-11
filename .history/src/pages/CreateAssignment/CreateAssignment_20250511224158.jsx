@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import AuthContext from '../../context/AuthContext/AuthContext';
-import Swal from 'sweetalert2';
 
 const CreateAssignment = () => {
   const { user } = useContext(AuthContext);
@@ -17,8 +16,6 @@ const CreateAssignment = () => {
     difficulty: 'easy',
     dueDate: new Date(),
   });
-
-const isDarkMode = () => document.documentElement.classList.contains('dark');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,45 +35,22 @@ const isDarkMode = () => document.documentElement.classList.contains('dark');
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch('https://server-side-study-hive.vercel.app/assignments', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          email: user.email,
-        }),
-      });
+    const response = await fetch('https://server-side-study-hive.vercel.app/assignments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...formData,
+        email: user.email, // Optional: include user email if you need it
+      }),
+    });
 
-      if (response.ok) {
-        Swal.fire({
-          title: 'Success!',
-          text: 'Assignment created successfully!',
-          icon: 'success',
-          background: isDarkMode() ? '#1f2937' : '#fff',
-          color: isDarkMode() ? '#f3f4f6' : '#000',
-        }).then(() => {
-          navigate('/assignments');
-        });
-      } else {
-        Swal.fire({
-          title: 'Failed!',
-          text: 'Failed to create assignment. Please try again.',
-          icon: 'error',
-          background: isDarkMode() ? '#1f2937' : '#fff',
-          color: isDarkMode() ? '#f3f4f6' : '#000',
-        });
-      }
-    } catch (error) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'An unexpected error occurred.',
-        icon: 'error',
-        background: isDarkMode() ? '#1f2937' : '#fff',
-        color: isDarkMode() ? '#f3f4f6' : '#000',
-      });
+    if (response.ok) {
+      Swal.fire('Assignment created successfully!');
+      navigate('/assignments'); // Redirect to assignments page
+    } else {
+      alert('Failed to create assignment. Please try again.');
     }
   };
 

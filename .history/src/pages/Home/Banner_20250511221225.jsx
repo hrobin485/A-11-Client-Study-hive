@@ -16,9 +16,9 @@ const Banner = () => {
                         className="max-w-sm w-64 rounded-t-[40px] rounded-br-[40px] border-l-4 border-b-4 border-blue-400 shadow-2xl" />
                     <motion.img
                         src="https://images.pexels.com/photos/5940841/pexels-photo-5940841.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        animate={{ x: [45, 80, 40] }}
+                        animate={{ x: [100, 150, 100] }}
                         transition={{ duration: 10, delay: 5, repeat: Infinity }}
-                        className="max-w-sm w-64 rounded-t-[40px] rounded-br-[40px] border-l-4 border-b-4 border-blue-400 shadow-2xl -ml-10 lg:ml-20" />
+                        className="max-w-sm w-64 rounded-t-[40px] rounded-br-[40px] border-l-4 border-b-4 border-blue-400 shadow-2xl -ml-24 lg:ml-20" />
                 </div>
                 <div className='flex-1'>
                     <motion.h1
