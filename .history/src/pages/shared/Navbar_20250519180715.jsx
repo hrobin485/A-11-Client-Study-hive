@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import logo from "../../assets/logo/nav-logo.png";
@@ -25,8 +25,9 @@ const Navbar = () => {
 
   /* 2️⃣ helper that closes the dropdown */
   const closeMobileMenu = () => {
+    // blur the button so the dropdown loses focus → DaisyUI / Tailwind hides it
     if (mobileMenuRef.current) {
-      mobileMenuRef.current.closest("details")?.removeAttribute("open"); 
+      mobileMenuRef.current.closest("details")?.removeAttribute("open"); // if using <details>
       document.activeElement?.blur();
     }
   };

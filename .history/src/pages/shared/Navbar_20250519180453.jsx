@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import logo from "../../assets/logo/nav-logo.png";
@@ -25,8 +25,9 @@ const Navbar = () => {
 
   /* 2️⃣ helper that closes the dropdown */
   const closeMobileMenu = () => {
+    // blur the button so the dropdown loses focus → DaisyUI / Tailwind hides it
     if (mobileMenuRef.current) {
-      mobileMenuRef.current.closest("details")?.removeAttribute("open"); 
+      mobileMenuRef.current.closest("details")?.removeAttribute("open"); // if using <details>
       document.activeElement?.blur();
     }
   };
@@ -48,7 +49,6 @@ const Navbar = () => {
     <li>
       <NavLink
         to="/"
-         onClick={closeMobileMenu}
         className={({ isActive }) =>
           `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
         }
@@ -59,7 +59,6 @@ const Navbar = () => {
     <li>
       <NavLink
         to="/Assignments"
-         onClick={closeMobileMenu}
         className={({ isActive }) =>
           `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
         }
@@ -70,7 +69,6 @@ const Navbar = () => {
     <li>
       <NavLink
         to="/PendingAssignments"
-         onClick={closeMobileMenu}
         className={({ isActive }) =>
           `dark:text-gray-100 ${isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"}`
         }
@@ -102,7 +100,6 @@ const Navbar = () => {
                         </svg>
                     </div>
                     <ul
-                         ref={mobileMenuRef}
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-white dark:bg-gray-800 dark:text-gray-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         {links}
