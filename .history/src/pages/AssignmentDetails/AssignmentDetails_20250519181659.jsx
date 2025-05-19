@@ -116,7 +116,7 @@ const AssignmentDetails = () => {
   }
 
   return (
-    <div className="container my-5 rounded-lg mx-auto p-4 dark:bg-gray-800 dark:text-gray-100">
+    <div className="container my-5 mx-auto p-4 dark:bg-gray-800 dark:text-gray-100">
       <h1 className="text-3xl font-bold mb-4">Assignment Details</h1>
       <div className="bg-white shadow-md rounded p-4  dark:bg-gray-800 dark:text-gray-100">
         <h2 className="text-2xl font-bold">{assignment.title}</h2>

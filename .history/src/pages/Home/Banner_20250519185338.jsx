@@ -10,20 +10,10 @@ const Banner = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const fireThemedAlert = (options = {}) => {
-        const isDark = document.documentElement.classList.contains("dark");
-
-        Swal.fire({
-            background: isDark ? "#1f2937" : "#fff",   // gray‑800 vs white
-            color: isDark ? "#f3f4f6" : "#374151", // gray‑100 vs gray‑700
-            confirmButtonColor: isDark ? "#3b82f6" : "#2563eb", // blue‑500
-            ...options,
-        });
-    };
     /* click handler for the Get Started button */
     const handleGetStarted = () => {
         if (user) {
-            fireThemedAlert({
+            Swal.fire({
                 title: "You're already signed in!",
                 text: "Feel free to explore any page. Thank you for being with Study Hive.",
                 icon: "info",
@@ -33,7 +23,6 @@ const Banner = () => {
             navigate("/signIn");
         }
     };
-
     return (
 
         <div className="hero bg-base-200 min-h-96 mt-5 rounded-xl dark:bg-gray-800  dark:text-gray-100">
@@ -61,7 +50,7 @@ const Banner = () => {
                     <p className="py-6">
                         Study Hive is a collaborative platform designed to enhance learning and teamwork among students and learners of all ages. The platform's core focus is to enable collaboration, facilitate assignment completion, and foster personal and academic growth in a community-driven environment.
                     </p>
-                    <button onClick={handleGetStarted} className="btn btn-primary">
+                    <button onClick={handleClick} className="btn btn-primary">
                         Get Started
                     </button>
                 </div>

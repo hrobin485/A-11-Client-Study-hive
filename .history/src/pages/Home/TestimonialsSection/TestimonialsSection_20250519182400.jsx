@@ -32,7 +32,7 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => (
-  <section className="py-16 px-4 rounded-xl bg-slate-100 dark:bg-gray-800 dark:text-gray-100">
+  <section className="py-16 px-4 rounded-lg bg-slate-100 dark:bg-gray-800 dark:text-gray-100">
     <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
       What Our Users Say
     </h2>
