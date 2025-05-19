@@ -40,7 +40,7 @@ const TestimonialsSection = () => (
       Real feedback from learners around the world.
     </p>
 
-    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl mx-auto">
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
       {testimonials.map((u, idx) => (
         <article
           key={idx}

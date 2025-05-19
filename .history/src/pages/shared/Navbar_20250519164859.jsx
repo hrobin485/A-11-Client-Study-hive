@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import logo from "../../assets/logo/nav-logo.png";
@@ -6,20 +6,7 @@ import { HiMoon, HiSun } from 'react-icons/hi';
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
-    const [darkMode, setDarkMode] = useState(
-    () => localStorage.getItem("studyHiveTheme") === "dark"
-  );
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("studyHiveTheme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("studyHiveTheme", "light");
-    }
-  }, [darkMode]);
-
-  const toggleTheme = () => setDarkMode((prev) => !prev);
+    const [darkMode, setDarkMode] = useState(false);
 
     const handleSignOut = () => {
         signOutUser()
@@ -31,7 +18,14 @@ const Navbar = () => {
             });
     };
 
-    
+    const toggleTheme = () => {
+        setDarkMode(!darkMode);
+        if (!darkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    };
 
  const links = (
   <>

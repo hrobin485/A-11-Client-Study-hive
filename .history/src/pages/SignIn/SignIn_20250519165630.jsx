@@ -38,12 +38,12 @@ const SignIn = () => {
     return (
         <div className="hero bg-base-200 min-h-screen my-5 rounded-xl  dark:bg-gray-800 dark:text-gray-100">
             <div className="hero-content flex-col md:flex-row-reverse lg:flex-row-reverse ">
-                <div className="text-center md:text-left lg:text-left w-64 md:w-96 lg:w-96">
+                <div className="text-center md:text-left lg:text-left w-64 lg:w-96">
                     <Lottie animationData={loginLottieJSON}></Lottie>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl  dark:bg-gray-800 dark:text-gray-100">
                     <h1 className="ml-8 mt-4 text-5xl font-bold">Login now!</h1>
-                    <form onSubmit={handleSignIn} className="card-body">
+                    <form onSubmit={handleSignIn} className="card-body md:w-40">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>

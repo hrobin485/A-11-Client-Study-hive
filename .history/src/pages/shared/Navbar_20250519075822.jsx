@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import logo from "../../assets/logo/nav-logo.png";
@@ -6,20 +6,7 @@ import { HiMoon, HiSun } from 'react-icons/hi';
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
-    const [darkMode, setDarkMode] = useState(
-    () => localStorage.getItem("studyHiveTheme") === "dark"
-  );
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("studyHiveTheme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("studyHiveTheme", "light");
-    }
-  }, [darkMode]);
-
-  const toggleTheme = () => setDarkMode((prev) => !prev);
+    const [darkMode, setDarkMode] = useState(false);
 
     const handleSignOut = () => {
         signOutUser()
@@ -31,7 +18,14 @@ const Navbar = () => {
             });
     };
 
-    
+    const toggleTheme = () => {
+        setDarkMode(!darkMode);
+        if (!darkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    };
 
  const links = (
   <>
@@ -71,7 +65,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar mt-1 bg-slate-300 dark:bg-gray-800 text-black dark:text-gray-100 rounded-lg">
+        <div className="navbar bg-slate-300 dark:bg-gray-800 text-black dark:text-gray-100 rounded-lg">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -94,9 +88,9 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <a className="flex items-center gap-1 md:gap-2 lg:gap-2">
-                    <img className='w-6  md:w-12 lg:w-12 dark:bg-gray-100 rounded-xl' src={logo} alt="" />
-                    <h3 className="md:text-2xl  lg:text-2xl font-bold">Study Hive</h3>
+                <a className="flex items-center gap-2">
+                    <img className='w-12 dark:bg-gray-100 rounded-xl' src={logo} alt="" />
+                    <h3 className="text-2xl font-bold">Study Hive</h3>
                 </a>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -125,10 +119,10 @@ const Navbar = () => {
                         </div>
                     ) : (
                         <>
-                            <Link to="/register"><button className="hover:text-blue-700">Register</button></Link>
+                            <Link to="/register">Register</Link>
                             <Link to="/signIn">
                                 <button className=" ml-2 
-                    hover:text-blue-700">Sign In</button>
+                      dark:hover:text-blue-700">Sign In</button>
                             </Link>
                         </>
                     )

@@ -146,7 +146,7 @@ const Assignments = () => {
       <h1 className="text-3xl font-bold mb-4">Assignments</h1>
 
       {/* Search and Filter Section */}
-      <div className=" flex flex-col md:flex-row lg:flex-row gap-y-3 md:gap-5 lg:gap-5 mb-4">
+      <div className="gap-y-3 lg:ml-10 md:flex lg:flex gap-5 mb-4">
         <div className="space-x-3">
           <input
             type="text"
@@ -185,52 +185,56 @@ const Assignments = () => {
       {/* Assignments Table */}
       <div className='overflow-y-auto max-w-full'>
         <table className="table-auto  border-collapse border border-gray-400 overflow-y-auto">
-          <thead>
-            <tr>
-              <th className="border border-gray-400 px-4 py-2">Thumbnail</th>
-              <th className="border border-gray-400 px-4 py-2">Title</th>
-              <th className="border border-gray-400 px-4 py-2">Description</th>
-              <th className="border border-gray-400 px-4 py-2">Marks</th>
-              <th className="border border-gray-400 px-4 py-2">Difficulty</th>
-              <th className="border border-gray-400 px-4 py-2">Due Date</th>
-              <th className="border border-gray-400 px-4 py-2">Actions</th>
+        <thead>
+          <tr>
+            <th className="border border-gray-400 px-4 py-2">Thumbnail</th>
+            <th className="border border-gray-400 px-4 py-2">Title</th>
+            <th className="border border-gray-400 px-4 py-2">Description</th>
+            <th className="border border-gray-400 px-4 py-2">Marks</th>
+            <th className="border border-gray-400 px-4 py-2">Difficulty</th>
+            <th className="border border-gray-400 px-4 py-2">Due Date</th>
+            <th className="border border-gray-400 px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {assignments.map((assignment) => (
+            <tr key={assignment._id}>
+              <td className="border border-gray-400 px-4 py-2">
+                {assignment.thumbnail && (
+                  <img src={assignment.thumbnail} alt="Thumbnail" className="rounded-lg object-cover" />
+                )}
+              </td>
+              <td className="border border-gray-400 px-4 py-2">{assignment.title}</td>
+              <td className="border border-gray-400 px-4 py-2">{assignment.description}</td>
+              <td className="border border-gray-400 px-4 py-2">{assignment.marks}</td>
+              <td className="border border-gray-400 px-4 py-2">{assignment.difficulty}</td>
+              <td className="border border-gray-400 px-4 py-2">
+                {new Date(assignment.dueDate).toLocaleDateString()}
+              </td>
+              <td className="border border-gray-400 px-4 py-2 space-y-2">
+                <button
+                  onClick={() => handleUpdate(assignment._id)}
+                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => handleDelete(assignment._id)}
+                  className="bg-red-500 text-white px-4 py-2 rounded"
+                >
+                  Delete
+                </button>
+                <button
+                  onClick={() => navigate(`/assignment/${assignment._id}`)}
+                  className="bg-gray-500 text-white px-4 py-2 rounded"
+                >
+                  View
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {assignments.map((assignment) => (
-              <tr key={assignment._id}>
-                <td className="border border-gray-400 px-4 py-2">
-                  {assignment.thumbnail && (
-                    <img src={assignment.thumbnail} alt="Thumbnail" className="rounded-lg object-cover" />
-                  )}
-                </td>
-                <td className="border border-gray-400 px-4 py-2">{assignment.title}</td>
-                <td className="border border-gray-400 px-4 py-2">{assignment.description}</td>
-                <td className="border border-gray-400 px-4 py-2">{assignment.marks}</td>
-                <td className="border border-gray-400 px-4 py-2">{assignment.difficulty}</td>
-                <td className="border border-gray-400 px-4 py-2">
-                  {new Date(assignment.dueDate).toLocaleDateString()}
-                </td>
-                <td className="border border-gray-400 px-4 py-2 space-y-2">
-                  {[
-                    { label: "Update", color: "bg-blue-500", action: () => handleUpdate(assignment._id) },
-                    { label: "Delete", color: "bg-red-500", action: () => handleDelete(assignment._id) },
-                    { label: "View", color: "bg-gray-500", action: () => navigate(`/assignment/${assignment._id}`) },
-                  ].map(({ label, color, action }) => (
-                    <button
-                      key={label}
-                      onClick={action}
-                      className={`${color} text-white w-full p-2 rounded`}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </td>
-
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table>
       </div>
     </div>
   );

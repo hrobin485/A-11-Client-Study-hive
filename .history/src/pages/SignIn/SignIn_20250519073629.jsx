@@ -37,8 +37,8 @@ const SignIn = () => {
 
     return (
         <div className="hero bg-base-200 min-h-screen my-5 rounded-xl  dark:bg-gray-800 dark:text-gray-100">
-            <div className="hero-content flex-col md:flex-row-reverse lg:flex-row-reverse ">
-                <div className="text-center md:text-left lg:text-left w-64 md:w-96 lg:w-96">
+            <div className="hero-content flex-col lg:flex-row-reverse ">
+                <div className="text-center lg:text-left w-96">
                     <Lottie animationData={loginLottieJSON}></Lottie>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl  dark:bg-gray-800 dark:text-gray-100">
@@ -76,9 +76,20 @@ const SignIn = () => {
                                 </a>
                             </div>
                         </div>
-                        <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
-                        </div>
+
+                        <button
+                            type="submit"
+                            className="
+     px-4 py-2  
+    font-semibold
+    text-blue-600 dark:text-blue-400
+    bg-transparent border-none           
+    hover:underline focus:outline-none   
+  "
+                        >
+                            Login
+                        </button>
+
                     </form>
                     <div className="form-control">
                         <SocialLogin></SocialLogin>

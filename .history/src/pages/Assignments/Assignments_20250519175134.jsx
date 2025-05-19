@@ -220,7 +220,7 @@ const Assignments = () => {
                     <button
                       key={label}
                       onClick={action}
-                      className={`${color} text-white w-full p-2 rounded`}
+                      className={`${color} text-white w-full py-2 rounded`}
                     >
                       {label}
                     </button>
