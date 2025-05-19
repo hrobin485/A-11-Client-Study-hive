@@ -5,8 +5,8 @@ import Footer from '../pages/shared/Footer';
 
 const MainLayout = () => {
     return (
-        <div className={`bg-slate-50 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
-        <div className="w-11/12 mx-auto">
+        <div className='bg-slate-50 dark:bg-gray-900 overflow-hidden '>
+        <div className="w-11/12 mx-auto ">
           <Navbar></Navbar>
           <Outlet></Outlet>
         </div>
@@ -14,6 +14,6 @@ const MainLayout = () => {
     </div>
     );
 };
-${darkMode ? 'bg-gray-800' : 'bg-slate-300'}
+
 
 export default MainLayout;
